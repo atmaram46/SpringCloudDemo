@@ -25,7 +25,10 @@ public class AuthService {
 
     public AuthResponse register(AuthRequest authRequest) {
         //do validation if user already exists
-        authRequest.setPassword(BCrypt.hashpw(authRequest.getPassword(), BCrypt.gensalt()));
+        //This change is made in order not to generate new salt each time....
+        //The previous generated salt needs to be stored in DB.
+        authRequest.setUserSalt(BCrypt.gensalt());
+        authRequest.setPassword(BCrypt.hashpw(authRequest.getPassword(), authRequest.getUserSalt()));
 
         UserVO userVO = restTemplate.postForObject("http://user-service/users/saveUser", authRequest, UserVO.class);
         Assert.notNull(userVO, "Failed to register user. Please try again later");
@@ -37,7 +40,6 @@ public class AuthService {
     }
 
     public AuthResponse findDetails(LoginRequest loginRequest) {
-        loginRequest.setPassword(BCrypt.hashpw(loginRequest.getPassword(), BCrypt.gensalt()));
         UserVO userVO = restTemplate.postForObject("http://user-service/users/login", loginRequest, UserVO.class);
         if(userVO != null) {
             String accessToken = jwt.generate(userVO, "ACCESS");

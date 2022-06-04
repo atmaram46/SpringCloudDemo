@@ -26,5 +26,5 @@ public class User {
     private String departmentId;
     private String password;
     private String role;
-
+    private String userSalt;
 }

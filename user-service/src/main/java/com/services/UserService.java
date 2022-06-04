@@ -6,6 +6,7 @@ import com.entities.value_objects.ResponseTemplateVO;
 import com.repos.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,7 +34,8 @@ public class UserService {
     public User getByLoginDetails(String email, String password) {
         List<User> result = this.repository.findByEmail(email);
         for(User data: result) {
-            if(data.getPassword().equals(password))
+            String encryptPassword = BCrypt.hashpw(password, data.getUserSalt());
+            if(data.getPassword().equals(encryptPassword))
                 return data;
         }
         return null;
