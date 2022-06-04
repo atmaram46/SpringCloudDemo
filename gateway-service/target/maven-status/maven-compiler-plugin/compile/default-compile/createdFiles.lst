@@ -1,0 +1,6 @@
+com\GatewayApplication.class
+com\config\GatewayConfig.class
+com\config\JwtUtil.class
+com\controller\FallbackController.class
+com\config\RouterValidator.class
+com\config\AuthenticationFilter.class
