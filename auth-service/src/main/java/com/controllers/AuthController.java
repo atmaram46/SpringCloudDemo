@@ -2,10 +2,8 @@ package com.controllers;
 
 import com.entities.AuthRequest;
 import com.entities.AuthResponse;
-import com.entities.LoginRequest;
 import com.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +23,9 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(authRequest));
     }
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<AuthResponse> validateLogin(@RequestBody LoginRequest loginReq) {
-        AuthResponse response = authService.findDetails(loginReq);
-        if(response != null) {
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.notFound().build();
+    @PostMapping(value = "/updateUser")
+    public ResponseEntity<AuthResponse> validateLogin(@RequestBody AuthRequest authRequest) {
+        return ResponseEntity.ok(authService.update(authRequest));
     }
 
     @GetMapping(value = "/test")
