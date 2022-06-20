@@ -13,18 +13,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity(name = "users")
+//@Entity(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
+//    private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String departmentId;
-    private String password;
-    private String role;
-    private String userSalt;
+    private String dob;
 }

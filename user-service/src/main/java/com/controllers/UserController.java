@@ -1,12 +1,12 @@
 package com.controllers;
 
-import com.entities.LoginDetails;
 import com.entities.User;
-import com.entities.value_objects.ResponseTemplateVO;
 import com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+
+import javax.ws.rs.DELETE;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -16,24 +16,24 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user) {
-        return userService.save(user);
+    public String saveUser(@RequestBody User user) {
+        return userService.saveAndValidate(user);
     }
 
-    @GetMapping(value = "/{id}/{role}")
-    public ResponseTemplateVO getUser(
-            @RequestHeader(value = "id") Long userId,
-            @RequestHeader(value = "role") String role) {
-        return userService.getUserWithDepartment(userId);
+    @GetMapping(value = "/{email}")
+    public User getUser(
+            @RequestHeader(value = "email") String email) {
+        return userService.getDataForEmail(email);
     }
 
-    @PostMapping(value = "/login")
-    public User validateUserLogin(@RequestBody LoginDetails loginDetails) {
-        return userService.getByLoginDetails(loginDetails.getEmail(), loginDetails.getPassword());
+    @PostMapping(value = "/delete")
+    public void validateUserLogin(@RequestBody String email) {
+        userService.removeKeyData(email);
     }
 
-    @GetMapping(value = "/secure")
-    public String getSecure() {
-        return "Secure endpoint available";
+    @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
+    public String updateUser(@RequestBody User user) {
+        return userService.validateAndUpdate(user);
     }
+
 }

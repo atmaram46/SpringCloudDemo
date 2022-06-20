@@ -9,18 +9,15 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>config-service</module>
         <module>discovery-service</module>
-        <module>gateway-service</module>
         <module>user-service</module>
-        <module>departments-service</module>
         <module>auth-service</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.8.RELEASE</version>
+        <version>2.5.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 

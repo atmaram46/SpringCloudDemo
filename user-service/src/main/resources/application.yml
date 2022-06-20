@@ -4,21 +4,7 @@ server:
 spring:
   application:
     name: user-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/springdemo
-    username: root
-    password: Admin#11
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
-
-jwt:
-  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
-  expiration: 86400
+user:
+  cache:
+    size: 20
