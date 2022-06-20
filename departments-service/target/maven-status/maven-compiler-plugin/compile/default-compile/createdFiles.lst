@@ -1,6 +1,0 @@
-com\entities\Department$DepartmentBuilder.class
-com\repos\DepartmentRepository.class
-com\services\DepartmentService.class
-com\entities\Department.class
-com\DepartmentsApplication.class
-com\controllers\DepartmentController.class
